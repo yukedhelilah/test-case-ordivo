@@ -28,12 +28,12 @@ Route::group(['prefix' => 'product'], function() {
 });
 
 Route::group(['prefix' => 'cart'], function() {
-    Route::post('add', [ProductController::class, 'add']);
-    Route::post('checkout', [ProductController::class, 'checkout']);
-    Route::get('list', [ProductController::class, 'list']);
+    Route::post('add', [CartController::class, 'add']);
+    Route::post('checkout', [CartController::class, 'checkout']);
+    Route::get('list', [CartController::class, 'list']);
 });
 
 Route::group(['prefix' => 'transaction'], function() {
-    Route::post('list', [ProductController::class, 'list']);
-    Route::post('order', [ProductController::class, 'order']);
+    Route::post('list', [TransactionController::class, 'list']);
+    Route::post('order', [TransactionController::class, 'order']);
 });

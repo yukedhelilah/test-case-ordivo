@@ -7,9 +7,9 @@ use App\Helpers\JsonFormatter;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\TransactionItem;
-use DataTables;
 use Exception;
 use Validator;
+use DB;
 
 class TransactionController extends Controller
 {
@@ -28,10 +28,9 @@ class TransactionController extends Controller
                 );
             }
 
-            $data = TransactionItem::findOrFail($request->transaction_id);
-            $data = DataTables::of($data)->make();
+            $data = TransactionItem::where('transaction_id',$request->transaction_id)->get();
 
-            return JsonFormatter::datatables(
+            return JsonFormatter::success(
                 $data,
                 'success get data'
             );
@@ -44,7 +43,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function checkout(Request $request)
+    public function order(Request $request)
     {
         DB::beginTransaction();
         try {

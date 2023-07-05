@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Helpers\JsonFormatter;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use DataTables;
 use Exception;
 use Validator;
+use DB;
 
 class ProductController extends Controller
 {
@@ -84,9 +84,8 @@ class ProductController extends Controller
     {
         try {
             $data = Product::where('flag', 1)->orderBy('created_date', 'desc')->get();
-            $data = DataTables::of($data)->make();
 
-            return JsonFormatter::datatables(
+            return JsonFormatter::success(
                 $data,
                 'success get data'
             );

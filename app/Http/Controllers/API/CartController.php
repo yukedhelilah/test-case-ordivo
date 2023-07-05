@@ -9,9 +9,9 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Transaction;
 use App\Models\TransactionItem;
-use DataTables;
 use Exception;
 use Validator;
+use DB;
 
 class CartController extends Controller
 {
@@ -112,9 +112,8 @@ class CartController extends Controller
     {
         try {
             $data = Cart::orderBy('created_date', 'desc')->get();
-            $data = DataTables::of($data)->make();
 
-            return JsonFormatter::datatables(
+            return JsonFormatter::success(
                 $data,
                 'success get data'
             );
